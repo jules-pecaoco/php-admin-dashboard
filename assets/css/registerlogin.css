@@ -1,0 +1,308 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
+/* CSS Variables for Easy Customization */
+:root {
+  --primary-bg-color: #effcfd;
+  --primary-font-family: "Montserrat", sans-serif;
+  --primary-font-color: #333;
+  --button-bg-color: #2dd8e8;
+  --button-border-color: #2dd8e8;
+  --button-text-color: #021212;
+  --button-bg-focus: #85aef2;
+  --ghost-button-color: #4f75ec;
+  --ghost-button-text: #333;
+  --input-bg-color: #effcfd;
+  --container-bg-color: #effcfd;
+  --overlay-bg-gradient: linear-gradient(90deg, rgba(239, 252, 253, 1) 0%, rgba(45, 216, 232, 1) 50%, rgba(79, 117, 236, 1) 100%);
+  --overlay-panel-color: #021212;
+}
+
+/* Reset and Global Styles */
+* {
+  box-sizing: border-box;
+  letter-spacing: 0.5px;
+}
+
+body {
+  background: var(--primary-bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: var(--primary-font-family);
+  height: 100dvh;
+  overflow: hidden;
+}
+
+h1,
+h2 {
+  margin: 0;
+  text-align: center;
+}
+
+h1 {
+  font-weight: bold;
+}
+
+p {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0px;
+  margin: 0;
+}
+
+span {
+  font-size: 12px;
+}
+
+a {
+  color: var(--primary-font-color);
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+/* Button Styles */
+button:active {
+  transform: scale(0.9);
+}
+
+button:focus,
+button:hover {
+  background-color: var(--button-bg-focus);
+}
+
+button {
+  border-radius: 20px;
+  border: 1px solid var(--button-border-color);
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+  cursor: pointer;
+}
+
+/* Ghost Button Style */
+.ghost {
+  text-transform: capitalize;
+  letter-spacing: 0;
+  font-size: 0.7rem;
+  font-weight: 800;
+  border: none;
+  background-color: transparent;
+  color: var(--ghost-button-color);
+}
+
+.ghost-text {
+  padding-top: 1rem;
+  font-weight: 100;
+  color: var(--ghost-button-text);
+}
+
+/* Form Styles */
+form {
+  background-color: var(--container-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+input {
+  background-color: var(--input-bg-color);
+  border: none;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  border-bottom: 1px solid #2dd8e8;
+}
+
+.user__name {
+  display: flex;
+  gap: 1rem;
+}
+
+label {
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.password_field {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  position: relative;
+}
+
+.password-toggle-icon {
+  vertical-align: middle;
+  border-bottom: var(--button-border-color);
+  font-size: 1.1rem;
+  position: absolute;
+  right: 2%;
+  z-index: 1000;
+}
+
+.password-toggle-icon:hover {
+  cursor: pointer;
+}
+
+/* Container and Layout Styles */
+.container {
+  background-color: var(--container-bg-color);
+  border-radius: 10px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  position: relative;
+  overflow: hidden;
+  width: 768px;
+  max-width: 100%;
+  min-height: 480px;
+}
+
+/* Panel Transition Styles */
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+  gap: 0.5rem;
+}
+
+.alert {
+  font-size: 12px;
+  color: red;
+}
+
+.sign-in-container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.container.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+}
+
+.sign-up-container {
+  left: 0;
+  width: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+  animation: show 0.6s;
+}
+
+/* Keyframes for Smooth Transitions */
+@keyframes show {
+  0%,
+  49.99% {
+    opacity: 0;
+    z-index: 1;
+  }
+  50%,
+  100% {
+    opacity: 1;
+    z-index: 5;
+  }
+}
+
+/* Overlay Styles */
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s ease-in-out;
+  z-index: 100;
+}
+
+.container.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  background: var(--overlay-bg-gradient);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0 0;
+  color: #ffffff;
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  transform: translateX(0);
+  transition: transform 0.6s ease-in-out;
+}
+
+.container.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+/* Overlay Panel */
+.overlay-panel {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 40px;
+  text-align: center;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  transition: transform 0.6s ease-in-out;
+  color: var(--overlay-panel-color);
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.container.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.container.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+/* Social Container Styles */
+.social-container {
+  margin: 20px 0;
+}
+
+.social-container a {
+  border: 1px solid #dddddd;
+  border-radius: 50%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+  height: 40px;
+  width: 40px;
+}

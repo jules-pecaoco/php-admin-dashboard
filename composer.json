@@ -1,0 +1,6 @@
+{
+  "name": "php-admin-dashboard",
+  "require": {
+    "php": "^8.0"
+  }
+}
